@@ -1,4 +1,3 @@
-
 //( 2 * 32 ) - 23 + 6 / 3 + 12 % 2
 
 public class Calculator {
