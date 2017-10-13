@@ -30,27 +30,30 @@ public class Calculator {
         System.out.println(equation);
     }
 
-    public static double add(double a, double b){
-        return 0;
+    public static void add(double a, double b){
+
     }
 
-    public static double subtract(double a, double b){
-        return 0;
+    public static void subtract(double a, double b){
+
     }
 
-    public static double multiply(double a, double b){
-        return 0;
+    public static void multiply(double a, double b){
+
     }
 
-    public static double divide(double a, double b){
-        return 0;
+    public static void divide(double a, double b) throws Exception{
+        if(b == 0.0){
+            throw new IllegalOperationException();
+        }
+
     }
 
-    public static double modulo(double a, double b){
-        return 0;
+    public static void modulo(double a, double b){
+
     }
 
-    public static double percent(double a, double b){
-        return 0;
+    public static void perenthasis(){
+
     }
 }
