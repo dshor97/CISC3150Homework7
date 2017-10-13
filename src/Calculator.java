@@ -102,31 +102,33 @@ public class Calculator {
         }
     }
 
-    public static void add(double a, double b){
-
+    public static double add(double a, double b){
+        return a + b;
     }
 
-    public static void subtract(double a, double b){
-
+    public static double subtract(double a, double b){
+        return a - b;
     }
 
-    public static void multiply(double a, double b){
-
+    public static double multiply(double a, double b){
+        return a * b;
     }
 
-    public static void divide(double a, double b) throws Exception{
+    public static double divide(double a, double b) throws Exception{
         if(b == 0.0){
             throw new IllegalOperationException();
         }
+        return a / b;
 
     }
 
-    public static void modulo(double a, double b){
-
+    public static double modulo(double a, double b){
+        return a % b;
     }
 
     public static double solve(Stack<String> a){
         Stack<String> ans = new Stack();
+        Double temp;
         double one;
         double two;
         try {
@@ -134,26 +136,30 @@ public class Calculator {
                 if (precedence(a.peek()) == 0) {
                     ans.add(a.pop());
                 } else if (a.peek() == "+") {
-                    add(Double.parseDouble(a.pop()), Double.parseDouble(a.pop()));
+                    temp = add(Double.parseDouble(a.pop()), Double.parseDouble(a.pop()));
+                    ans.add(temp.toString());
                 } else if (a.peek() == "-") {
                     one = Double.parseDouble(a.pop());
                     two = Double.parseDouble(a.pop());
-                    subtract(two, one);
+                    temp = subtract(two, one);
+                    ans.add(temp.toString());
                 } else if (a.peek() == "*") {
                     multiply(Double.parseDouble(a.pop()), Double.parseDouble(a.pop()));
                 } else if (a.peek() == "/") {
                     one = Double.parseDouble(a.pop());
                     two = Double.parseDouble(a.pop());
-                    divide(two, one);
+                    temp = divide(two, one);
+                    ans.add(temp.toString());
                 } else if (a.peek() == "%") {
                     one = Double.parseDouble(a.pop());
                     two = Double.parseDouble(a.pop());
-                    modulo(two, one);
+                    temp = modulo(two, one);
+                    ans.add(temp.toString());
                 }
             }
                 return Double.parseDouble(a.pop());
         }catch (Exception e){
-            System.out.println(e);
+            System.out.println(e.getStackTrace());
         }
         return 0;
     }
