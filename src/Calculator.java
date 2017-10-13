@@ -38,18 +38,23 @@ public class Calculator {
 
         System.out.println(postFixStk);
 
+
     }
 
     public static void makePostfix(String [] a){
         Stack<String> operations = new Stack();
+        Stack<String> temp = new Stack();
         for(int i = 0; i < a.length ; i++){
             if(a[i] == "+" || a[i] == "-" || a[i] == "*" || a[i] == "/" || a[i] == "%"){
                 if(operations.isEmpty()) {
                     operations.add(a[i]);
                 }
                 else{
-                    if(precidence(operations.peek()) > precidence(a[i])){
-                        postFixStk.add(operations.pop());
+                    if(precedence(operations.peek()) > precedence(a[i]) && operations.peek() != "(") {
+                        temp.add(operations.pop());
+                        operations.add(a[i]);
+                    }
+                    else{
                         operations.add(a[i]);
                     }
                 }
@@ -65,24 +70,30 @@ public class Calculator {
                         isPar = true;
                     }
                     else{
-                        postFixStk.add(operations.pop());
+                        temp.add(operations.pop());
 
                     }
                 }
             }
             else{
-                postFixStk.add(a[i]);
+                temp.add(a[i]);
             }
+        }
+        while(!temp.isEmpty()){
+            postFixStk.add(temp.pop());
         }
 
     }
 
-    public static int precidence(String a){
+    public static int precedence(String a){
         if(a == "+" || a == "-"){
             return 1;
         }
         else if(a == "/" || a == "*" || a == "%"){
             return 2;
+        }
+        else if(a == "("){
+            return 3;
         }
         else{
             return 0;
