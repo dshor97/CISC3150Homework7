@@ -123,7 +123,22 @@ public class Calculator {
 
     }
 
-    public static void perenthasis(){
+    public static double solve(Stack<String> a){
+        Stack<String> ans = new Stack();
+        while(!postFixStk.isEmpty())
+            if(precedence(a.peek()) == 0){
+                ans.add(a.pop());
+            }else if(a.peek() == "+"){
 
+            }else if(a.peek() == "-"){
+
+            }else if(a.peek() == "*"){
+
+            }else if(a.peek() == "/"){
+
+            }else if(a.peek() == "%"){
+
+            }
+        return 0;
     }
 }
