@@ -2,6 +2,7 @@
 
 public class Calculator {
     public static void main(String[] args){
+        String equation = new String();
 
         String[] s = new String [17];
         s[0] = "(";
@@ -22,6 +23,11 @@ public class Calculator {
         s[15] = "2";
         s[16] = ")";
 
+        for(int i = 0; i < s.length; i++){
+            equation += s[i];
+        }
+
+        System.out.println(equation);
     }
 
     public static double add(double a, double b){
