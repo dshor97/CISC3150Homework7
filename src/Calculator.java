@@ -3,7 +3,7 @@
 
 public class Calculator {
     public static void main(String[] args){
-        
+
         String[] s = new String [15];
         s[0] = "(";
         s[1] = "2";
