@@ -1,8 +1,13 @@
 //( 2 * 32 ) - 23 + 6 / 3 + 12 % 2
 
+import java.util.Stack;
+
 public class Calculator {
+
+    public static Stack<String> postFixStk = new Stack();
+
     public static void main(String[] args){
-        String equation = new String();
+        String expression = new String();
 
         String[] s = new String [17];
         s[0] = "(";
@@ -24,10 +29,64 @@ public class Calculator {
         s[16] = ")";
 
         for(int i = 0; i < s.length; i++){
-            equation += s[i];
+            expression += s[i];
         }
 
-        System.out.println(equation);
+        System.out.println(expression);
+
+        makePostfix(s);
+
+        System.out.println(postFixStk);
+
+    }
+
+    public static void makePostfix(String [] a){
+        Stack<String> operations = new Stack();
+        for(int i = 0; i < a.length ; i++){
+            if(a[i] == "+" || a[i] == "-" || a[i] == "*" || a[i] == "/" || a[i] == "%"){
+                if(operations.isEmpty()) {
+                    operations.add(a[i]);
+                }
+                else{
+                    if(precidence(operations.peek()) > precidence(a[i])){
+                        postFixStk.add(operations.pop());
+                        operations.add(a[i]);
+                    }
+                }
+            }
+            else if(a[i] == "("){
+                operations.add(a[i]);
+            }
+            else if(a[i] == ")"){
+                boolean isPar = false;
+                while(!isPar){
+                    if(operations.peek() == "("){
+                        operations.pop();
+                        isPar = true;
+                    }
+                    else{
+                        postFixStk.add(operations.pop());
+
+                    }
+                }
+            }
+            else{
+                postFixStk.add(a[i]);
+            }
+        }
+
+    }
+
+    public static int precidence(String a){
+        if(a == "+" || a == "-"){
+            return 1;
+        }
+        else if(a == "/" || a == "*" || a == "%"){
+            return 2;
+        }
+        else{
+            return 0;
+        }
     }
 
     public static void add(double a, double b){
