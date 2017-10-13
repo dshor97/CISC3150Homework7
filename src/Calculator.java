@@ -38,6 +38,8 @@ public class Calculator {
 
         System.out.println(postFixStk);
 
+        System.out.println(solve(postFixStk));
+
 
     }
 
@@ -125,20 +127,34 @@ public class Calculator {
 
     public static double solve(Stack<String> a){
         Stack<String> ans = new Stack();
-        while(!postFixStk.isEmpty())
-            if(precedence(a.peek()) == 0){
-                ans.add(a.pop());
-            }else if(a.peek() == "+"){
-
-            }else if(a.peek() == "-"){
-
-            }else if(a.peek() == "*"){
-
-            }else if(a.peek() == "/"){
-
-            }else if(a.peek() == "%"){
-
+        double one;
+        double two;
+        try {
+            while (!postFixStk.isEmpty()) {
+                if (precedence(a.peek()) == 0) {
+                    ans.add(a.pop());
+                } else if (a.peek() == "+") {
+                    add(Double.parseDouble(a.pop()), Double.parseDouble(a.pop()));
+                } else if (a.peek() == "-") {
+                    one = Double.parseDouble(a.pop());
+                    two = Double.parseDouble(a.pop());
+                    subtract(two, one);
+                } else if (a.peek() == "*") {
+                    multiply(Double.parseDouble(a.pop()), Double.parseDouble(a.pop()));
+                } else if (a.peek() == "/") {
+                    one = Double.parseDouble(a.pop());
+                    two = Double.parseDouble(a.pop());
+                    divide(two, one);
+                } else if (a.peek() == "%") {
+                    one = Double.parseDouble(a.pop());
+                    two = Double.parseDouble(a.pop());
+                    modulo(two, one);
+                }
             }
+                return Double.parseDouble(a.pop());
+        }catch (Exception e){
+            System.out.println(e);
+        }
         return 0;
     }
 }
