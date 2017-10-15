@@ -10,9 +10,11 @@ public class Calculator {
         try {
             String expression = new String();
 
-            String[] s = new String[args.length];
-            for (int x = 0; x < args.length; x++) {
-                s[x] = new String(args[x]);
+            String[] s = new String[args.length + 2];
+            s[0] = new String("(");
+            s[args.length + 1] = new String(")");
+            for (int x = 1; x < args.length + 1; x++) {
+                s[x] = new String(args[x-1]);
             }
 
             for (int i = 0; i < s.length; i++) {
