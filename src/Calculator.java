@@ -7,24 +7,28 @@ public class Calculator {
     public static Stack<String> postFixStk = new Stack();
 
     public static void main(String[] args){
-        String expression = new String();
+        try {
+            String expression = new String();
 
-        String[] s = new String[args.length];
-        for(int x = 0; x<args.length;x++){
-            s[x] = new String(args[x]);
+            String[] s = new String[args.length];
+            for (int x = 0; x < args.length; x++) {
+                s[x] = new String(args[x]);
+            }
+
+            for (int i = 0; i < s.length; i++) {
+                expression += s[i];
+            }
+
+            System.out.println(expression);
+
+            makePostfix(s);
+
+            System.out.println(postFixStk);
+
+            System.out.println(solve(postFixStk));
+        }catch(Exception e){
+            System.out.println(e);
         }
-
-        for(int i = 0; i < s.length; i++){
-            expression += s[i];
-        }
-
-        System.out.println(expression);
-
-        makePostfix(s);
-
-        System.out.println(postFixStk);
-
-        System.out.println(solve(postFixStk));
 
 
     }
@@ -101,9 +105,10 @@ public class Calculator {
         return a * b;
     }
 
-    public static double divide(double a, double b) throws Exception{
+    public static double divide(double a, double b) throws IllegalOperationException{
         if(b == 0.0){
-            throw new IllegalOperationException();
+            throw new IllegalOperationException("There is a division by zero in your expression. \n" +
+                    "Fix this error to get a result.");
         }
         return a / b;
 
@@ -113,12 +118,11 @@ public class Calculator {
         return a % b;
     }
 
-    public static double solve(Stack<String> a){
+    public static double solve(Stack<String> a) throws IllegalOperationException{
         Stack<String> ans = new Stack();
         Double temp;
         double one;
         double two;
-        try {
             while (!postFixStk.isEmpty()) {
                 if (precedence(a.peek()) == -1) {
                     ans.add(a.pop());
@@ -155,10 +159,5 @@ public class Calculator {
                 }
             }
                 return Double.parseDouble(ans.pop());
-        }catch (Exception e){
-            System.out.println(e);
-
-        }
-        return 0;
     }
 }
