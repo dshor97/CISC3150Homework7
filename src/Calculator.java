@@ -1,4 +1,4 @@
-//( 2 * 32 ) - 23 + 6 / 3 + 12 % 2
+//(( 2 * 32 ) - 23 + 6 / 3 + 12 % 2)
 
 import java.util.Stack;
 
@@ -136,30 +136,40 @@ public class Calculator {
                 if (precedence(a.peek()) == 0) {
                     ans.add(a.pop());
                 } else if (a.peek() == "+") {
-                    temp = add(Double.parseDouble(a.pop()), Double.parseDouble(a.pop()));
+                    a.pop();
+                    one = Double.parseDouble(ans.pop());
+                    two = Double.parseDouble(ans.pop());
+                    temp = add(one, two);
                     ans.add(temp.toString());
                 } else if (a.peek() == "-") {
-                    one = Double.parseDouble(a.pop());
-                    two = Double.parseDouble(a.pop());
+                    a.pop();
+                    one = Double.parseDouble(ans.pop());
+                    two = Double.parseDouble(ans.pop());
                     temp = subtract(two, one);
                     ans.add(temp.toString());
                 } else if (a.peek() == "*") {
-                    multiply(Double.parseDouble(a.pop()), Double.parseDouble(a.pop()));
+                    a.pop();
+                    one = Double.parseDouble(ans.pop());
+                    two = Double.parseDouble(ans.pop());
+                    temp = multiply(one, two);
+                    ans.add(temp.toString());
                 } else if (a.peek() == "/") {
-                    one = Double.parseDouble(a.pop());
-                    two = Double.parseDouble(a.pop());
+                    a.pop();
+                    one = Double.parseDouble(ans.pop());
+                    two = Double.parseDouble(ans.pop());
                     temp = divide(two, one);
                     ans.add(temp.toString());
                 } else if (a.peek() == "%") {
-                    one = Double.parseDouble(a.pop());
-                    two = Double.parseDouble(a.pop());
+                    a.pop();
+                    one = Double.parseDouble(ans.pop());
+                    two = Double.parseDouble(ans.pop());
                     temp = modulo(two, one);
                     ans.add(temp.toString());
                 }
             }
-                return Double.parseDouble(a.pop());
+                return Double.parseDouble(ans.pop());
         }catch (Exception e){
-            System.out.println(e.getStackTrace());
+            e.printStackTrace();
         }
         return 0;
     }
