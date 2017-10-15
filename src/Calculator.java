@@ -13,26 +13,7 @@ public class Calculator {
         for(int x = 0; x<args.length;x++){
             s[x] = new String(args[x]);
         }
-    /*
-        s[0] = "(";
-        s[1] = "(";
-        s[2] = "2";
-        s[3] = "*";
-        s[4] = "32";
-        s[5] = ")";
-        s[6] = "-";
-        s[7] = "23";
-        s[8] = "+";
-        s[9] = "6";
-        s[10] = "/";
-        s[11] = "3";
-        s[12] = "+";
-        s[13] = "12";
-        s[14] = "%";
-        s[15] = "2";
-        s[16] = ")";
-
-        */
+        
         for(int i = 0; i < s.length; i++){
             expression += s[i];
         }
@@ -53,12 +34,13 @@ public class Calculator {
         Stack<String> temp = new Stack();
 
         for(int i = 0; i < a.length ; i++){
-            if(a[i] == "+" || a[i] == "-" || a[i] == "*" || a[i] == "/" || a[i] == "%"){
+
+            if(a[i].equals("+") || a[i].equals("-") || a[i].equals("*") || a[i].equals("/") || a[i].equals("%")){
                 if(operations.isEmpty()) {
                     operations.add(a[i]);
                 }
                 else{
-                    if(precedence(operations.peek()) > precedence(a[i]) && operations.peek() != "(") {
+                    if(precedence(operations.peek()) > precedence(a[i]) && !operations.peek().equals("(")) {
                         temp.add(operations.pop());
                         operations.add(a[i]);
                     }
@@ -67,13 +49,13 @@ public class Calculator {
                     }
                 }
             }
-            else if(a[i] == "("){
+            else if(a[i].equals("(")){
                 operations.add(a[i]);
             }
-            else if(a[i] == ")"){
+            else if(a[i].equals(")")){
                 boolean isPar = false;
                 while(!isPar){
-                    if(operations.peek() == "("){
+                    if(operations.peek().equals("(")){
                         operations.pop();
                         isPar = true;
                     }
@@ -95,18 +77,16 @@ public class Calculator {
     }
 
     public static int precedence(String a){
-        if(a == "+" || a == "-"){
+        if(a.equals("+") || a.equals("-")){
             return 0;
         }
-        else if(a == "/" || a == "*" || a == "%"){
+        else if(a.equals("*") || a.equals("/")|| a.equals("%")){
             return 1;
         }
-        else if(a == "("){
+        else if(a.equals("(") || a.equals(")")){
             return 2;
         }
-        else{
-            return -1;
-        }
+        else return -1;
     }
 
     public static double add(double a, double b){
@@ -142,31 +122,31 @@ public class Calculator {
             while (!postFixStk.isEmpty()) {
                 if (precedence(a.peek()) == -1) {
                     ans.add(a.pop());
-                } else if (a.peek() == "+") {
+                } else if (a.peek().equals("+")) {
                     a.pop();
                     one = Double.parseDouble(ans.pop());
                     two = Double.parseDouble(ans.pop());
                     temp = add(one, two);
                     ans.add(temp.toString());
-                } else if (a.peek() == "-") {
+                } else if (a.peek().equals("-")) {
                     a.pop();
                     one = Double.parseDouble(ans.pop());
                     two = Double.parseDouble(ans.pop());
                     temp = subtract(two, one);
                     ans.add(temp.toString());
-                } else if (a.peek() == "*") {
+                } else if (a.peek().equals("*")) {
                     a.pop();
                     one = Double.parseDouble(ans.pop());
                     two = Double.parseDouble(ans.pop());
                     temp = multiply(one, two);
                     ans.add(temp.toString());
-                } else if (a.peek() == "/") {
+                } else if (a.peek().equals("/")) {
                     a.pop();
                     one = Double.parseDouble(ans.pop());
                     two = Double.parseDouble(ans.pop());
                     temp = divide(two, one);
                     ans.add(temp.toString());
-                } else if (a.peek() == "%") {
+                } else if (a.peek().equals("%")) {
                     a.pop();
                     one = Double.parseDouble(ans.pop());
                     two = Double.parseDouble(ans.pop());
@@ -176,7 +156,8 @@ public class Calculator {
             }
                 return Double.parseDouble(ans.pop());
         }catch (Exception e){
-            e.printStackTrace();
+            System.out.println(e);
+
         }
         return 0;
     }
