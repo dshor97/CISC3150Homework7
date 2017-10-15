@@ -13,7 +13,7 @@ public class Calculator {
         for(int x = 0; x<args.length;x++){
             s[x] = new String(args[x]);
         }
-        
+
         for(int i = 0; i < s.length; i++){
             expression += s[i];
         }
