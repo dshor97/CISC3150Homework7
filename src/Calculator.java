@@ -1,4 +1,4 @@
-//(( 2 * 32 ) - 23 + 6 / 3 + 12 % 2)
+//( ( 2 * 32 ) - 23 + 6 / 3 + 12 % 2 )
 
 import java.util.Stack;
 
@@ -9,7 +9,11 @@ public class Calculator {
     public static void main(String[] args){
         String expression = new String();
 
-        String[] s = new String [17];
+        String[] s = new String[args.length];
+        for(int x = 0; x<args.length;x++){
+            s[x] = new String(args[x]);
+        }
+    /*
         s[0] = "(";
         s[1] = "(";
         s[2] = "2";
@@ -28,6 +32,7 @@ public class Calculator {
         s[15] = "2";
         s[16] = ")";
 
+        */
         for(int i = 0; i < s.length; i++){
             expression += s[i];
         }
@@ -46,6 +51,7 @@ public class Calculator {
     public static void makePostfix(String [] a){
         Stack<String> operations = new Stack();
         Stack<String> temp = new Stack();
+
         for(int i = 0; i < a.length ; i++){
             if(a[i] == "+" || a[i] == "-" || a[i] == "*" || a[i] == "/" || a[i] == "%"){
                 if(operations.isEmpty()) {
@@ -84,21 +90,22 @@ public class Calculator {
         while(!temp.isEmpty()){
             postFixStk.add(temp.pop());
         }
+        System.out.println("Finished changing to postfix.");
 
     }
 
     public static int precedence(String a){
         if(a == "+" || a == "-"){
-            return 1;
+            return 0;
         }
         else if(a == "/" || a == "*" || a == "%"){
-            return 2;
+            return 1;
         }
         else if(a == "("){
-            return 3;
+            return 2;
         }
         else{
-            return 0;
+            return -1;
         }
     }
 
@@ -133,7 +140,7 @@ public class Calculator {
         double two;
         try {
             while (!postFixStk.isEmpty()) {
-                if (precedence(a.peek()) == 0) {
+                if (precedence(a.peek()) == -1) {
                     ans.add(a.pop());
                 } else if (a.peek() == "+") {
                     a.pop();
