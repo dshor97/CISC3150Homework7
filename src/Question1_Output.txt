@@ -1,0 +1,63 @@
+Here are some outputs of the program:
+
+javac Calculator 65 + 3 * 2 + ( 4 % 5 )
+
+(65+3*2+(4%5))
+Finished changing to postfix.
+[+, +, %, 5, 4, *, 2, 3, 65]
+75.0
+
+Process finished with exit code 0
+
+
+javac Calculator 4 * ( 4 * ( 2 + 1 ) 2 ) - 2
+
+(4*(4*(2+1)2)-2)
+Finished changing to postfix.
+[-, 2, *, *, 2, +, 1, 2, 4, 4]
+LookAtMrAlgebraOverHereException was thrown.
+This is an incomplete expression.
+Fix the expression and try again.
+
+Process finished with exit code 0
+
+
+javac Calculator 2 * 3 + ( 2 * 3 ) - 4 )
+
+(2*3+(2*3)-4))
+UserIsADumbassException was thrown.
+There is an extra Parenthesis in your expression.
+
+Process finished with exit code 0
+
+
+javac Calculator 2 * 3 + ( 3 / 0 ) % 4
+
+(2*3+(3/0)%4)
+Finished changing to postfix.
+[+, %, 4, /, 0, 3, *, 3, 2]
+An Illegal operation was performed.
+There is a division by zero in your expression.
+Fix this error to get a result.
+
+Process finished with exit code 0
+
+
+javac Calculator ( 1a * 2 ) + 3 * 10
+
+((1a*2)+3*10)
+UserIsADumbassException was thrown.
+There is an illegal term in your expression.
+The illegal term is 1a
+
+Process finished with exit code 0
+
+
+javac Calculator 3 + 2 + ( 5 * 6 ) + 2 / 10
+
+(3+2+(5*6)+2/10)
+Finished changing to postfix.
+[+, +, +, /, 10, 2, *, 6, 5, 2, 3]
+35.2
+
+Process finished with exit code 0

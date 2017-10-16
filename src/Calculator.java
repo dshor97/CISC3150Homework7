@@ -63,7 +63,7 @@ public class Calculator {
                 boolean isPar = false;
                 while(!isPar){
                     if(operations.isEmpty()){
-                        throw new UserIsADumbassException();
+                        throw new UserIsADumbassException("There is an extra Parenthesis in your expression.");
                     }
                     if(operations.peek().equals("(")){
                         operations.pop();
@@ -121,7 +121,7 @@ public class Calculator {
 
     public static double divide(double a, double b) throws IllegalOperationException{
         if(b == 0.0){
-            throw new IllegalOperationException("There is a division by zero in your expression. \n" +
+            throw new IllegalOperationException("There is a division by zero in your expression.\n" +
                     "Fix this error to get a result.");
         }
         return a / b;
