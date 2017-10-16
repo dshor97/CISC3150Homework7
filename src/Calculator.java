@@ -38,6 +38,7 @@ public class Calculator {
     public static void makePostfix(String [] a){
         Stack<String> operations = new Stack();
         Stack<String> temp = new Stack();
+        String string = new String();
 
         for(int i = 0; i < a.length ; i++){
 
