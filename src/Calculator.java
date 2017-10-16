@@ -35,7 +35,7 @@ public class Calculator {
 
     }
 
-    public static void makePostfix(String [] a){
+    public static void makePostfix(String [] a) throws LookAtMrAlgebraOverHereException,UserIsADumbassException,IllegalOperationException{
         Stack<String> operations = new Stack();
         Stack<String> temp = new Stack();
         String string = new String();
@@ -62,6 +62,9 @@ public class Calculator {
             else if(a[i].equals(")")){
                 boolean isPar = false;
                 while(!isPar){
+                    if(operations.isEmpty()){
+                        throw new UserIsADumbassException();
+                    }
                     if(operations.peek().equals("(")){
                         operations.pop();
                         isPar = true;
@@ -73,6 +76,14 @@ public class Calculator {
                 }
             }
             else{
+                char[] test = a[i].toCharArray();
+                for(int z = 0;z<test.length;z++){
+                    if(test[z] == '0' || test[z] == '1' ||test[z] == '2' ||test[z] == '3' ||test[z] == '4' ||test[z] == '5' ||test[z] == '6' ||test[z] == '7' ||test[z] == '8' ||test[z] == '9' ){ }
+                    else{
+                        throw new UserIsADumbassException("There is an illegal term in your expression. \n" +
+                                "The illegal term is " + a[i]);
+                    }
+                }
                 temp.add(a[i]);
             }
         }
@@ -121,7 +132,7 @@ public class Calculator {
         return a % b;
     }
 
-    public static double solve(Stack<String> a) throws IllegalOperationException{
+    public static double solve(Stack<String> a) throws LookAtMrAlgebraOverHereException, IllegalOperationException{
         Stack<String> ans = new Stack();
         Double temp;
         double one;
@@ -160,6 +171,10 @@ public class Calculator {
                     temp = modulo(two, one);
                     ans.add(temp.toString());
                 }
+            }
+            if(ans.size() > 1){
+                throw new LookAtMrAlgebraOverHereException("This is an incomplete expression. \n " +
+                        "Fix the expression and try again.");
             }
                 return Double.parseDouble(ans.pop());
     }

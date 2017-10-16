@@ -9,7 +9,7 @@ public class IllegalOperationException extends IllegalArgumentException {
     }
     public String toString(){
         String string = new String();
-        string += message + '\n';
+        string += message;
         return string;
     }
 }
