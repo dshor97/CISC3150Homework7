@@ -1,0 +1,48 @@
+I have found the following information in:
+http://javabeginnerstutorial.com/core-java-tutorial/transient-vs-static-variable-java/
+
+In this example there is an employee class:
+
+import java.io.Serializable;
+
+public class Employee extends superEmployee {
+  public String firstName;
+  private static final long serialVersionUID = 5462223600l;
+}
+class superEmployee implements Serializable{
+  public String lastName;
+  static  String companyName;
+  transient  String address;
+  static transient String companyCEO;
+}
+
+In this class there is a static String, a transient String and a static transient String variable. Next there is an
+example where the main class calls an instance of this class and then assigning the variables different values. When the
+code is run the static and transient variables are not shown because an instance of a static variable cannot be shown.
+
+But, when the class instantiates the static and transient variables in the employee class itself:
+
+import java.io.Serializable;
+public class Employee extends superEmployee {
+  public String firstName;
+  private static final long serialVersionUID = 5462223600l;
+}
+class superEmployee implements Serializable {
+  public String lastName;
+  /*
+   * Here i am providing the value of company name,companyCEO and address
+   * while defining these variables.
+   */
+  static String companyName = "TATA";
+  transient String address = "DEL";
+  static transient String companyCEO = "Jayshree";
+}
+
+Then we see that the static variables are shown while the transient variables are still not being shown. But what is
+interesting is that the static transient variable is still being showed.
+
+In this page there are also these bullet points.
+
+Static variables value can be stored while serializing if the same is provided while initialization.
+If variable is defined as Static and Transient both, than static modifier will govern the behavior of variable
+and not Transient.
