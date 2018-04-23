@@ -1,4 +1,3 @@
-
 import java.util.Stack;
 
 public class Calculator {
@@ -77,7 +76,7 @@ public class Calculator {
             else{
                 char[] test = a[i].toCharArray();
                 for(int z = 0;z<test.length;z++){
-                    if(test[z] == '0' || test[z] == '1' ||test[z] == '2' ||test[z] == '3' ||test[z] == '4' ||test[z] == '5' ||test[z] == '6' ||test[z] == '7' ||test[z] == '8' ||test[z] == '9' ){ }
+                    if(test[z] == '0' || test[z] == '1' ||test[z] == '2' ||test[z] == '3' ||test[z] == '4' ||test[z] == '5' ||test[z] == '6' ||test[z] == '7' ||test[z] == '8' ||test[z] == '9' || test[z] == '.' || test[z] == '-'){ }
                     else{
                         throw new UserIsADumbassException("There is an illegal term in your expression. \n" +
                                 "The illegal term is " + a[i]);
@@ -127,7 +126,11 @@ public class Calculator {
 
     }
 
-    public static double modulo(double a, double b){
+    public static double modulo(double a, double b) throws IllegalOperationException{
+        if(b == 0.0){
+            throw new IllegalOperationException("There is a modulo by zero in your expression.\n" +
+                "Fix this error to get a result.");
+        }
         return a % b;
     }
 
@@ -138,6 +141,7 @@ public class Calculator {
         double two;
             while (!postFixStk.isEmpty()) {
                 if (precedence(a.peek()) == -1) {
+
                     ans.add(a.pop());
                 } else if (a.peek().equals("+")) {
                     a.pop();
